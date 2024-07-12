@@ -6,7 +6,7 @@
 
 ## 欢迎参与
 
-你也可以为这个项目出一份力，如果发现有价值的信息、文章、工具等可以到 [Issues ](https://github.com/SwiftOldDriver/iOS-Weekly/issues) 里提给我们，我们会尽快处理。记得写上推荐的理由哦。有建议和意见也欢迎到 [Issues ](https://github.com/SwiftOldDriver/iOS-Weekly/issues) 提出。
+你也可以为这个项目出一份力，如果发现有价值的信息、文章、工具等可以到 [Issues](https://github.com/SwiftOldDriver/iOS-Weekly/issues) 里提给我们，我们会尽快处理。记得写上推荐的理由哦。有建议和意见也欢迎到 [Issues](https://github.com/SwiftOldDriver/iOS-Weekly/issues) 提出。
 
 ## 支持我们：[WWDC23 内参](https://xiaozhuanlan.com/wwdc23)
 
@@ -32,6 +32,7 @@
 ## 贡献名单
 
 #### 轮值主编
+
 <div>
 <a href='https://github.com/ChengzhiHuang'>
 <img src='https://github.com/SwiftOldDriver/iOS-Weekly/blob/master/assets/author/chengzhi.png?raw=true'>

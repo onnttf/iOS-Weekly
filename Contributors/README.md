@@ -68,13 +68,11 @@ Editor of Old Driver Weekly, currently working at Zoom, involved in the developm
 
 老司机技术成员，偶尔 T 技术沙龙 的临时工，目前就职于百度（上海），百度输入法 iOS & Mac 应用的程序媛。美食、徒步爱好者~
 
-
 ### Leo
 
 <img src="https://avatars.githubusercontent.com/u/15663899?v=4" width="150"/>
 
 老司机技术成员，目前就职于字节跳动，负责 TikTok iOS 客户端体验。喜欢研究一些技术底层的原理，业余喜欢主机游戏（特别是魂类游戏）。
-
 
 ### 莲叔
 
@@ -206,7 +204,7 @@ Editor of Old Driver Weekly, currently working at Zoom, involved in the developm
 
 <img src="https://avatars.githubusercontent.com/u/5073511?v=4" width="150"/>
 
-https://github.com/100mango
+<https://github.com/100mango>
 
 老司机早期编辑，喜欢清晰简洁的代码与技术方案
 

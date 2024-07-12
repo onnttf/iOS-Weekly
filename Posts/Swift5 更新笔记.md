@@ -16,7 +16,7 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
 
 #### 新特性
 
- - Swift 不再包含 Swift 标准库的动态链接，并且会在 iOS 12.2, watchOS 5.2, and tvOS 12.2 中内置 Swift SDK 。从而 Swift apps 在你上传 App Store ，发布 TestFlight 测试，和本地打包时会变得更小。
+- Swift 不再包含 Swift 标准库的动态链接，并且会在 iOS 12.2, watchOS 5.2, and tvOS 12.2 中内置 Swift SDK 。从而 Swift apps 在你上传 App Store ，发布 TestFlight 测试，和本地打包时会变得更小。
 
     想要比较应用在 iOS 12.2 和 iOS 12.1 之前版本瘦身的大小的区别，你可以把应用的 deployment target 设为 iOS 12.1 或之前的版本，然后将scheme 设为 Generic iOS Device 生成一个归档文件。然后用选择 Archives organizer 中的发布应用中的 Development distribution。确定在 App Thinning 的下拉菜单中选中某个特定的设备如：iPhone XS 。当发布完成以后，在刚刚创建的文件夹中打开 App Thinning Size Report ，可以看到 iOS 12.2 的安装包要比 iOS 12.1 或者更早的版本要小。准确的大小差别取决于你的 app 使用系统框架的数量。
 
@@ -39,6 +39,7 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
 - 如果声明的类型与标准库中的类型具有相同的名称，则会覆盖了标准库中的类型声明。（46767892）
 
     例如，在模块 Foo 中声明了一个类型，名字是 Result
+
     ```swift
     // Module `Foo`.
     public enum Result<T> {
@@ -48,6 +49,7 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
     ```
 
     这样在任何使用了 Foo 模块的代码中，Result 类型都将被认为是 ```Foo.Result```：
+
     ```Swift
     import Foo
     
@@ -65,6 +67,7 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
 - 如果一个变量声明为```@dynamicCallable```的话，这样可以使用一个函数调用的语法糖，这个语法糖主要的使用场景是动态语言互操作（[SE-0216](https://github.com/apple/swift-evolution/blob/master/proposals/0216-dynamic-callable.md)）（47325423）
 
     例如：
+
     ```swift
     @dynamicCallable struct ToyCallable {
         func dynamicallyCall(withArguments: [Int]) {}
@@ -100,9 +103,10 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
         return .foo(bar: 0, 1, 2, 3) 
     } 
     ```
+
     这不是一个特意支持的特性，现在会产生编译错误了。（46821582）
     相对地，你可以用数组的声明来代替可变参数声明：
-    
+
     ```swift
     enum X {
         case foo(bar: [Int]) 
@@ -117,11 +121,11 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
 - 如果一个类型```T```符合 [Initialization with Literals](https://developer.apple.com/documentation/swift/swift_standard_library/initialization_with_literals) 中的一个协议，例如 [ExpressibleByIntegerLiteral](https://developer.apple.com/documentation/swift/expressiblebyintegerliteral) ，并且是一个标量表达式的话，那么将不需要一直使用```T```用在泛型协议声明中了
 
     例如：现在可以这样子写一个变量表达式
-    
+
     ```swift
     UInt64(0xffff_ffff_ffff_ffff) 
     ```
-    
+
     在之前的版本的话将会导致 [Int](https://developer.apple.com/documentation/swift/int) 溢出错误。（[SE-0213](https://github.com/apple/swift-evolution/blob/master/proposals/0213-literal-init-via-coercion.md)）（17088188）
 
 - 字符串插入大幅提高了性能表现。（[SE-0228](https://github.com/apple/swift-evolution/blob/master/proposals/0228-fix-expressiblebystringinterpolation.md)）（43621912）
@@ -129,6 +133,7 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
 - 一个旧的协议```_ExpressibleByStringInterpolation```被移除了。如果你希望继续使用这个协议的话，你可以通过条件编译选项来实现新老板本的兼容。
 
     例如：
+
     ```swift
     #if compiler(<5)
     extension MyType: _ExpressibleByStringInterpolation { /*...*/ }
@@ -141,18 +146,18 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
 
 #### 新特性
 
-- 标准库现在包括 `Result` 枚举 ` Result.success(_:)` 和 `Result.failure(_:)` 。在`do-catch` 语句和 `try` 表达式不能使用的情况下(例如在使用可能失败的异步api时)，使用 `Result` 手动传递和处理错误。
+- 标准库现在包括 `Result` 枚举 `Result.success(_:)` 和 `Result.failure(_:)` 。在`do-catch` 语句和 `try` 表达式不能使用的情况下(例如在使用可能失败的异步api时)，使用 `Result` 手动传递和处理错误。
 
     作为添加的一部分，`Error` 协议的自我一致性，这使得在通用上下文中处理错误更加容易。([SE-0235](https://github.com/apple/swift-evolution/blob/master/proposals/0235-add-result.md))(21200405)
 
 - [SIMD](https://developer.apple.com/documentation/swift/simd) 类型和基本操作符现在在标准库中定义。在 `simd` 框架提供的类型中， [float2](https://developer.apple.com/documentation/simd/float2) 和 [float3](https://developer.apple.com/documentation/simd/float3)，现在是新标准库类型的类型别名。
   
     `SIMD` 类型是标量元素类型上的泛型。例如，旧的 [float3](https://developer.apple.com/documentation/simd/float3) 类型是 `SIMD3<Float>` 的类型别名。任何符合 [SIMDScalar](https://developer.apple.com/documentation/swift/simdscalar) 协议的类型都可以用作 `SIMD` 向量的标量类型，但是有效的向量化依赖于为相关的 [SIMDStorage](https://developer.apple.com/documentation/swift/simdstorage) 类型选择一个良好的数据布局并进行有效的下标操作。
-   
+
     大多数使用 `simd` 类型的现有代码可以继续使用新的泛型 `simd` 类型，但是需要注意一些更改。
-   
+
     新类型增加了一些新的一致性; [SIMD](https://developer.apple.com/documentation/swift/simd) 向量现在是 [Hashable](https://developer.apple.com/documentation/swift/hashable) 、[Equatable](https://developer.apple.com/documentation/swift/equatable) 和 [Codable](https://developer.apple.com/documentation/swift/codable)。这可能允许您删除在您自己的代码中提供这些一致性的一些现有扩展。
-    
+
     为提供向量标量算法而重载的运算符集得到了极大的扩展。这使得编写一些东西变得更容易，但是在某些情况下会给 `typechecker` 带来歧义，并且可能需要分解一些表达式或使用显式类型进行注释。
 
     由于现在的类型是泛型而不是具体的，如果您已经在 `simd` 框架类型上定义了自己的协议，那么可能有必要重构一致性，因为 `Swift` 泛型类型不能对协议有多个条件一致性。这种情况相对比较少见，但通常需要重构如下代码:
@@ -280,6 +285,7 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
 - 一个新的依赖项镜像特性允许顶级包覆盖依赖项url。([SE-0219](https://github.com/apple/swift-evolution/blob/master/proposals/0219-package-manager-dependency-mirroring.md))(42511642)
 
     使用以下命令设置镜像：
+
     ```
     $ swift package config set-mirror \
     --package-url <original URL> --mirror-url <mirror URL>
@@ -361,14 +367,14 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
 
 - 扩展绑定现在支持嵌套类型的扩展，这些类型本身是在扩展内定义的。之前可能会因为声明顺序问题而失败，出现“undeclared type”错误。([SR-631](https://bugs.swift.org/browse/SR-631)) (20337822)
 
-- In Swift 5 mode, inferred associated types are no longer exposed publicly when a public type conforms to a non-public protocol. Instead, they get the minimum possible access to be visible from both the protocol and the conforming type. For source compatibility, Swift 4 and 4.2 modes continue to expose inferred associated types as publicly as the enclosing type unless the inferred associated type is itself less public than the conforming type. 
+- In Swift 5 mode, inferred associated types are no longer exposed publicly when a public type conforms to a non-public protocol. Instead, they get the minimum possible access to be visible from both the protocol and the conforming type. For source compatibility, Swift 4 and 4.2 modes continue to expose inferred associated types as publicly as the enclosing type unless the inferred associated type is itself less public than the conforming type.
 
     在 Swift 5 模式下，当公共类型实现非公共协议时，推断的关联类型不再公开。 相反，它们获得同时对协议和实现类型可见的最小访问权限。对于版本兼容性，Swift 4 和 4.2 模式继续将推断的关联类型公开为封闭类型，除非推断的关联类型本身不如实现类型开放。(46143405)
 
 - 在 Swift 5 模式下，返回 Self 的类方法不能再使用返回具体类类型（非 final）的方法来覆盖。这类代码不是类型安全的，需要将它们改掉。 ([SR-695](https://bugs.swift.org/browse/SR-695)) (47322892)
 
     例如：
-    
+
     ```swift
     class Base { 
         class func factory() -> Self { /*...*/ }
@@ -382,7 +388,7 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
 - 在 Swift 5 模式下，现在明确禁止声明与嵌套类型同名的静态属性，而之前可以在泛型类型的扩展中进行这样的声明。([SR-7251](https://bugs.swift.org/browse/SR-7251)) (47325738)
 
     例如：
-    
+
     ```swift
     struct Foo<T> {}
     extension Foo { 
@@ -399,7 +405,7 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
 - 在 Swift 5 模式下，@autoclosure 参数不能再被转发给另一个函数调用的 @autoclosure 参数。相反，你必须使用括号显式调用函数值。调用将被包含在一个隐式闭包中，保证了与 Swift 4 模式相同的行为。([SR-5719](https://bugs.swift.org/browse/SR-5719)) (37321597)
 
     例如：
-    
+
     ```swift
     func foo(_ fn: @autoclosure () -> Int) {}
     func bar(_ fn: @autoclosure () -> Int) {
@@ -413,7 +419,7 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
 - 在 Swift 5 模式下，在将 Optional 值转换为通用占位符类型时，编译器在展开值时会更加保守。这种转换结果现在更接近于非通用上下文中获得的结果。([SR-4248](https://bugs.swift.org/browse/SR-4248)) (47326318)
 
     例如：
-    
+
     ```swift
     func forceCast<U>(_ value: Any?, to type: U.Type) -> U {
         return value as! U 
@@ -434,13 +440,14 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
     protocol MyView: UIView { /*...*/ }
     protocol MyView where Self: UIView { /*...*/ } 
     ```
+
     Swift 4.2 接受了第二种形式，但还没有完全实现，在编译时或运行时偶尔会发生崩溃。([SR-5581](https://bugs.swift.org/browse/SR-5581)) (38077232)
 
 - Swift 4.2 接受了第二种形式，但还没有完全实现，在编译时或运行时偶尔会发生崩溃。
   - 在 Swift 5 模式下，当在自己的 didSet 或 willSet observer 中设置属性时，observer 现在只在 self 上设置属性（不管是隐式的还是显式的）时才会避免被递归调用。([SR-419](https://bugs.swift.org/browse/SR-419)) (32334826)
   
       例如：
-      
+
     ```swift
     class Node {
         var children = [Node]() 
@@ -466,5 +473,3 @@ Swift5 正式更新，官方提供了更新笔记说明，我们周报编辑团�
 - 如果你使用 #sourceLocation 将生成文件中的行映射回源代码，那么诊断信息将显示在源文件中而不是生成文件中。(43647151)
 
 - 使用泛型类型别名作为 @objc 方法的参数或返回类型不会再生成无效的 Objective-C 标头。([SR-8697](https://bugs.swift.org/browse/SR-8697)) (43347303)
-
-
